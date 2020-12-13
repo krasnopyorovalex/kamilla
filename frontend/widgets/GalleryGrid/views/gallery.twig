@@ -1,0 +1,50 @@
+<!-- GALLERY RESTAURANT -->
+<section class="section-gallery-restaurant bg-white">
+    <div class="container">
+        <div class="gallery">
+
+            <!-- FILTER -->
+            <div class="gallery-cat text-center">
+                <ul class="list-inline">
+                    {#<li class="active"><a href="#" data-filter="*">Все фотографии</a></li>#}
+                    {% for item in galleries %}
+                        <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#" data-filter=".gallery__id-{{ item.id }}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- END / FILTER -->
+
+            <!-- GALLERY CONTENT -->
+            <div class="gallery-content">
+
+                <div class="row">
+                    <div class="gallery-isotope">
+
+                        <!-- ITEM SIZE -->
+                        <div class="item-size col-xs-6 col-sm-6 col-md-4 col-lg-3"></div>
+                        <!-- END / ITEM SIZE -->
+
+                        {% for item in galleries %}
+                            {% for image in item.galleryImages %}
+                                <!-- ITEM -->
+                                <div class="item-isotope suite dining col-xs-6 col-sm-6 col-md-4 col-lg-3 gallery__id-{{ item.id }}">
+                                    <div class="gallery_item">
+                                        <a href="/userfiles/gallery/{{ item.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.title }}">
+                                            <img src="/userfiles/gallery/{{ item.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END / ITEM -->
+                            {% endfor %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- GALLERY CONTENT -->
+
+        </div>
+    </div>
+</section>
+<!-- END / GALLERY RESTAURANT -->

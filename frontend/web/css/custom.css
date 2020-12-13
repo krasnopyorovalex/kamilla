@@ -1,0 +1,17 @@
+.table__price tr td .gallery a img {
+    width: 100%
+}
+.table__price tr td .desc {
+    width: calc(100% - 360px);
+}
+.table__price tr td .gallery {
+    width: 350px;
+}
+
+.table__price tr td .desc {
+font-size: 18px;
+}
+
+.table__price tr td .title a {
+    display: inline;
+}

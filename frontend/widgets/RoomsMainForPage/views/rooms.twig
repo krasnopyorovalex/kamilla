@@ -1,0 +1,49 @@
+<!-- ACCOMMODATIONS -->
+<section class="section-accommo_1 bg-white">
+    <div class="container">
+
+        <div class="accomd-modations_1">
+
+            {{ app.params['blocks']['rooms_in_main']|raw }}
+
+            <div class="accomd-modations-content_1">
+
+                <div class="accomd-modations-slide_1">
+
+                    {% for item in model %}
+                    <!-- ITEM -->
+                    <div class="accomd-modations-room_1">
+                        <div class="img">
+                            <a href="{{ item.getLink() }}">
+                                <img src="{{ item.imageMainPreview.path }}" alt="{{ item.imageMainPreview.alt }}" title="{{ item.imageMainPreview.title }}">
+                            </a>
+                        </div>
+                        <div class="text">
+                            <a href="{{ item.getLink() }}" class="name__room">{{ item.menu_name }}</a>
+                            <p class="desc">{{ stringHelper.truncateWords(item.text_preview|striptags,21)|raw }}</p>
+                            <p class="price">
+                                <span class="amout">{{ item.price }}</span>
+                            </p>
+                            <a href="{{ item.getLink() }}" class="awe-btn awe-btn-default">подробнее</a>
+                        </div>
+                    </div>
+                    <!-- END / ITEM -->
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <hr />
+                    <a href="{{ path('site/page', {'alias': 'rooms'}) }}" class="awe-btn awe-btn-default">Все номера</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ACCOMMODATIONS -->

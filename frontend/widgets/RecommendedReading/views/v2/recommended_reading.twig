@@ -1,0 +1,16 @@
+{% if items %}
+    <!-- ROOM -->
+    <section class="section-room bg-white recommended_reading-v2">
+        <div class="container">
+            <div class="room-wrap-5">
+                <div class="row">
+                    <div class="recommended_reading-title">{{ app.params['settings']['recommended_reading_title'] }}</div>
+                    {% for key,value in items %}
+                        {{ this.render('item.twig', {'key': key, 'value': value, 'images': images})|raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END / ROOM -->
+{% endif %}

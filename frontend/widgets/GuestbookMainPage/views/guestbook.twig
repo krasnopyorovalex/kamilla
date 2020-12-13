@@ -1,0 +1,48 @@
+{% if model %}
+<!-- HOME GUEST BOOK -->
+<section class="section-home-guestbook bg-13">
+
+    <div class="awe-overlay"></div>
+
+    <div class="container">
+        <div class="home-guestbook">
+
+            <div class="row">
+                <div class="col-md-3 col-lg-2 col-lg-offset-1 col-lg-push-9 col-md-push-9">
+                    <div class="guestbook-header">
+                        {{ app.params['blocks']['guestbook_name_in_main']|raw }}
+                    </div>
+                </div>
+
+                {% if not app.mobileDetect.isMobile() %}
+                <div class="col-md-9 col-lg-9 col-lg-pull-3 col-md-pull-3">
+                    <div class="guestbook-content owl-single">
+                
+                        {% for item in model %}
+                        <!-- ITEM -->
+                        <div class="guestbook-item">
+                            {% if item.reviewsImages[0] %}
+                            <div class="img">
+                                <img src="/userfiles/reviews/{{ item.reviewsImages[0]['basename'] }}.{{ item.reviewsImages[0]['ext'] }}" alt="{{ item.reviewsImages[0]['alt'] }}" title="{{ item.reviewsImages[0]['title'] }}">
+                            </div>
+                            {% endif %}
+
+                            <div class="text">
+                                {{ item.text|raw }}
+                                {{ item.name }} {{ app.formatter.asDate(item.date, 'long') }}
+                            </div>
+                        </div>
+                        <!-- ITEM -->
+                        {% endfor %}
+
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+
+</section>
+<!-- END / HOME GUEST BOOK -->
+{% endif %}

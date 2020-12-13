@@ -1,0 +1,58 @@
+{{ set(this, 'title', model.title) }}
+{{ this.registerMetaTag({'name':'description', 'content': model.description}) }}
+{{ this.registerMetaTag({'name':'keywords', 'content': model.keywords}) }}
+
+<!-- SUB BANNER -->
+<section class="section-sub-banner awe-parallax{% if not model.imageHeader.path %} not__bg{% endif %}" {% if model.imageHeader %}style="background-image: url('{{ model.imageHeader.path }}');"{% endif %}>
+
+    {% if not app.mobileDetect.isMobile() and model.video %}
+        <div class="video__box-bg">
+            <video loop="loop" muted="muted" autoplay="autoplay" preload="metadata" style="width:100%; height:auto">
+                <source src="{{ model.video }}" type="video/mp4">
+            </video>
+        </div>
+    {% endif %}
+    
+    <div class="awe-overlay with-bg"></div>
+    <div class="sub-banner">
+        <div class="container">
+            <div class="text text-center">
+
+                <h1>{{ model.name }}</h1>
+
+                {% if model.slogan %}
+                    <p>{{ model.slogan }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- END / SUB BANNER -->
+
+{% if app.params['settings']['view_booking_block']%}
+    {{ use('frontend/widgets/CheckBooking/CheckBooking') }}
+    {{ check_booking_widget() }}
+{% endif %}
+
+<!-- ABOUT -->
+<section class="section-about">
+    <div class="container">
+        <div class="about">
+
+            <div class="breadcrumbs">
+                <ul>
+                    <li><a href="{{ app.homeUrl() }}">{{ app.params['bread_first_item_text'] }}</a></li>
+                    <li><a href="{{ path('site/page', {'alias': 'specials'}) }}">Спецпредложения</a></li>
+                    <li>{{ model.name }}</li>
+                </ul>
+            </div>
+            <!-- /.breadcrumbs -->
+
+            {{ model.text| raw }}
+
+        </div>
+    </div>
+</section>
+<!-- END / ABOUT -->

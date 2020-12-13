@@ -1,0 +1,202 @@
+{{ register_asset_bundle('frontend/assets/AppAsset') }}{{ void(this.beginPage()) }}<!DOCTYPE html>
+<html lang="{{ app.language }}">
+<head>
+    <meta charset="{{ app.charset }}">
+    <title>{{ this.title | raw }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="yandex-verification" content="5cb4c1bbe32fdd89" />
+    {{ html.csrfMetaTags| raw }}
+    {{ void(this.head) }}
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    {% if this.context.is_canonical %}{{ this.registerLinkTag({'rel':'canonical', 'href': url.to(url.canonical(),'https')}) }}{% endif %}
+    {% if not app.request.pathInfo %}{{ this.registerLinkTag({'rel':'canonical', 'href': url.to(app.request.hostInfo, 'https')}) }}{% endif %}
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+    {{ app.params['seo_blocks']['metric']| raw }}
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '845903775859507');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=845903775859507&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+	</head>
+<!--[if IE 7]> <body class="ie7 lt-ie8 lt-ie9 lt-ie10"> <![endif]-->
+<!--[if IE 8]> <body class="ie8 lt-ie9 lt-ie10"> <![endif]-->
+<!--[if IE 9]> <body class="ie9 lt-ie10"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+{{ void(this.beginBody()) }}
+
+
+<!-- PAGE WRAP -->
+<div id="page-wrap">
+
+    <!-- HEADER -->
+    <header id="header">
+
+        <!-- HEADER TOP -->
+        <div class="header_top" style="background-color: {{ app.params['settings']['bg_color_top_line'] }}">
+            <div class="container">
+                <div class="header_left float-left">
+                    <div class="address__h">
+                        {{ app.params['blocks']['address_header']|raw }}
+                    </div>
+                    <!-- /.address__h -->
+                    {{ app.params['blocks']['email_header']|raw }}
+                    {{ app.params['blocks']['phone_header']|raw }}
+                </div>
+            </div>
+        </div>
+        <!-- END / HEADER TOP -->
+
+        <!-- HEADER LOGO & MENU -->
+        <div class="header_content" id="header_content" style="background-color: {{ app.params['settings']['bg_color_menu'] }}">
+
+            <div class="container">
+                <!-- HEADER LOGO -->
+                <div class="header_logo">
+                    {{ app.params['blocks']['logo']|raw }}
+                </div>
+                <!-- END / HEADER LOGO -->
+
+                <!-- HEADER MENU -->
+                <nav class="header_menu">
+                    {{ use('frontend/widgets/Menu/Menu') }}
+                    {{ menu_widget({'css': 'menu', 'sysName': 'menu_header'}) }}
+                </nav>
+                <!-- END / HEADER MENU -->
+
+                {% if app.params['settings']['bg_color_top_line'] %}
+                    <style>
+                        .menu-bars span,.menu-bars span:after, .menu-bars span:before {
+                            background-color: {{ app.params['settings']['bg_color_top_line'] }}
+                        }
+                    </style>
+                {% endif %}
+                <!-- MENU BAR -->
+                <span class="menu-bars">
+                        <span></span>
+                    </span>
+                <!-- END / MENU BAR -->
+
+            </div>
+        </div>
+        <!-- END / HEADER LOGO & MENU -->
+
+    </header>
+    <!-- END / HEADER -->
+
+    {{ content| raw }}
+
+    <!-- FOOTER -->
+    <footer id="footer">
+
+        <!-- FOOTER TOP -->
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+
+                    <!-- WIDGET MAILCHIMP -->
+                    <div class="col-lg-8">
+                        <div class="mailchimp">
+                            {{ app.params['blocks']['string_in_footer']|raw }}
+                        </div>
+                    </div>
+                    <!-- END / WIDGET MAILCHIMP -->
+
+                    <!-- WIDGET SOCIAL -->
+                    <div class="col-lg-3 col-lg-offset-1">
+                        <div class="social">
+                            <div class="social-content">
+                                {{ app.params['seo_blocks']['we_in_social_networks']| replace({'&nbsp;': ''})| raw }}
+                                {{ app.params['seo_blocks']['share_in_social_networks']| raw }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / WIDGET SOCIAL -->
+
+                </div>
+            </div>
+        </div>
+        <!-- END / FOOTER TOP -->
+
+        <!-- FOOTER CENTER -->
+        <div class="footer_center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xs-12 col-lg-5">
+                        <div class="widget widget_logo">
+                            <div class="widget-logo">
+                                <div class="img">
+                                    {{ app.params['blocks']['logo_footer']|raw }}
+                                </div>
+                                <div class="text">
+                                    {{ app.params['blocks']['contacts_footer']|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-lg-2">
+                        <div class="widget">
+                            {{ app.params['blocks']['first_column_in_footer']|raw }}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-lg-2">
+                        <div class="widget">
+                            {{ app.params['blocks']['second_column_in_footer']|raw }}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-lg-3">
+                        <div class="widget widget_tripadvisor">
+                            {{ app.params['blocks']['counters_in_footer']|raw }}
+                            {{ app.params['seo_blocks']['count_mail']| raw }}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- END / FOOTER CENTER -->
+
+        <!-- FOOTER BOTTOM -->
+        <div class="footer_bottom">
+            <div class="container">
+                {{ menu_widget({'css': 'footer__menu', 'sysName': 'menu_footer'}) }}
+            </div>
+        </div>
+        <!-- END / FOOTER BOTTOM -->
+
+    </footer>
+    <!-- END / FOOTER -->
+
+</div>
+<!-- END / PAGE WRAP -->
+{{ app.params['seo_blocks']['chat']| raw }}
+{{ void(this.endBody()) }}
+{#<a href="http://100-hotels.ru/golosovanie#Kamilla Sunrise" target="_blank" class="btn__voting">
+    <img src="/images/kamilla-sunrise.png" />
+</a>#}
+<a href="https://100-hotels.ru/laureate/kamilla-sanrajz-alushta" target="_blank" class="btn__voting_reit">
+    <img src="/images/reit.jpg">
+</a>
+</body>
+</html>{{ void(this.endPage()) }}

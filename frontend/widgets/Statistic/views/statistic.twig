@@ -1,0 +1,30 @@
+<!-- HOTEL STATISTICS -->
+<section class="section-statistics awe-parallax bg-10">
+
+    <div class="awe-overlay"></div>
+
+    <div class="container">
+        <div class="statistics">
+
+            <h2 class="heading white text-center">{{ app.params['settings']['statistic_title'] }}</h2>
+
+            <div class="statistics_content">
+                <div class="row">
+
+                    {% for item in model %}
+                        <!-- ITEM -->
+                        <div class="col-xs-6 col-md-3">
+                            <div class="statistics_item">
+                                <span class="count">{{ item.count }}</span>
+                                <span>{{ item.text }}</span>
+                            </div>
+                        </div>
+                        <!-- END ITEM -->
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END / HOTEL STATISTICS -->

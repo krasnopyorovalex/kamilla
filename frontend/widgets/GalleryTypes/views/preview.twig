@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-push-2">
+        <!-- LAGER IMGAE -->
+        <div class="room-detail_img">
+            {% for item in gallery.galleryImages %}
+                <div class="room_img-item">
+                    <img src="/userfiles/gallery/{{ gallery.id }}/{{ item.basename }}.{{ item.ext }}" alt="{{ item.alt }}" title="{{ item.title }}">
+                    {% if item.name %}
+                        <div class="title">{{ item.name }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <!-- END / LAGER IMGAE -->
+
+        <!-- THUMBNAIL IMAGE -->
+        <div class="room-detail_thumbs">
+            {% for item in gallery.galleryImages %}
+                <a href="#"><img src="/userfiles/gallery/{{ gallery.id }}/{{ item.basename }}_thumb.{{ item.ext }}" alt="{{ item.alt }}"></a>
+            {% endfor %}
+        </div>
+        <!-- END / THUMBNAIL IMAGE -->
+    </div>
+</div>

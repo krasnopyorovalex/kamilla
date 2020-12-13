@@ -1,0 +1,5 @@
+<div class="img owl-single in__content-slider">
+    {% for image in gallery.galleryImages %}
+        <img src="/userfiles/gallery/{{ gallery.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+    {% endfor %}
+</div>

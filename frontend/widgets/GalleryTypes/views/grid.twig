@@ -1,0 +1,38 @@
+<!-- GALLERY RESTAURANT -->
+<section class="section-gallery-restaurant bg-white">
+    <div class="container">
+        <div class="gallery">
+            <div class="heading text-center">{{ gallery.name }}</div>
+            <!-- GALLERY CONTENT -->
+            <div class="gallery-content">
+
+                <div class="row">
+                    <div class="gallery-isotope">
+
+                        <!-- ITEM SIZE -->
+                        <div class="item-size col-xs-6 col-sm-6 col-md-4 col-lg-3"></div>
+                        <!-- END / ITEM SIZE -->
+
+                        {% for image in gallery.galleryImages %}
+                            <div class="item-isotope suite dining col-xs-6 col-sm-6 col-md-4 col-lg-3 gallery__id-{{ item.id }}">
+                                <div class="gallery_item">
+                                    <a href="/userfiles/gallery/{{ gallery.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.title }}">
+                                        <img src="/userfiles/gallery/{{ gallery.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                    </a>
+                                    {% if image.title %}
+                                        <div class="text">{{ image.name }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- GALLERY CONTENT -->
+
+        </div>
+    </div>
+</section>
+<!-- END / GALLERY RESTAURANT -->

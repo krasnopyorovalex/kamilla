@@ -1,0 +1,87 @@
+{{ set(this, 'title', model.title) }}
+{{ this.registerMetaTag({'name':'description', 'content': model.description}) }}
+{{ this.registerMetaTag({'name':'keywords', 'content': model.keywords}) }}
+
+{% if app.params['settings']['show_slider'] and model.carousel_id %}
+    {{ use('frontend/widgets/Carousel/Carousel') }}
+    {{ carousel_widget({'model': model.carousel}) }}
+{% else %}
+
+{% set banner = model.banners|first %}
+<!-- SUB BANNER -->
+{% if banner %}<a href="{{ banner.link }}">{% endif %}
+<section class="section-sub-banner{% if not model.image.path %} not__bg{% endif %}" style="{% if not banner.image and app.params['settings']['head_bg_if_not_img'] %}background-color:{{ app.params['settings']['head_bg_if_not_img'] }};{% endif %}background-image: url('{{ model.image.path  }}');">
+    {% if not app.mobileDetect.isMobile() and model.video %}
+        <div class="video__box-bg">
+            <video loop="loop" muted="muted" autoplay="autoplay" preload="metadata" style="width:100%; height:auto">
+                <source src="{{ model.video }}" type="video/mp4">
+            </video>
+        </div>
+    {% endif %}
+    
+    <div class="awe-overlay with-bg"></div>
+    <div class="sub-banner">
+        <div class="container">
+            <div class="text text-center{% if banner %} with_banner{% endif %}">
+
+                {% if not banner %}
+                    {% if model.name_is_h1 %}
+                        <h1>{{ model.name }}</h1>
+                    {% else %}
+                        <div class="h1">{{ model.name }}</div>
+                    {% endif %}
+
+                    {% if model.slogan %}
+                    <p>{{ model.slogan }}</p>
+                    {% endif %}
+                {% else %}
+                    <div class="h1">{{ banner.name }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- END / SUB BANNER -->
+{% if banner %}</a>{% endif %}
+{% endif %}
+
+{% if app.params['settings']['view_booking_block']%}
+    {{ use('frontend/widgets/CheckBooking/CheckBooking') }}
+    {{ check_booking_widget() }}
+{% endif %}
+
+<!-- ABOUT -->
+<section class="section-about">
+    <div class="container">
+        <div class="about">
+
+            {% if banner %}
+                <h1 class="name__with-banner">{{ model.name }}</h1>
+            {% endif %}
+
+            <div class="breadcrumbs">
+                <ul>
+                    <li><a href="{{ app.homeUrl() }}">{{ app.params['bread_first_item_text'] }}</a></li>
+                    <li>{{ model.name }}</li>
+                </ul>
+            </div>
+            <!-- /.breadcrumbs -->
+
+            {{ model.text|raw }}
+
+            {% if model.pagesAttaches %}
+                {{ use('frontend/widgets/RecommendedReading/RecommendedReading') }}
+                {{ recommended_reading_widget({'model': model}) }}
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+<!-- END / ABOUT -->
+
+{% if model.galleries %}
+    {{ use('frontend/widgets/GalleryGrid/GalleryGrid') }}
+    {{ gallery_grid_widget({'ids': model.galleries}) }}
+{% endif %}

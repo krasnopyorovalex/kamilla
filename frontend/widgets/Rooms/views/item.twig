@@ -1,0 +1,19 @@
+<!-- ITEM -->
+<div class="room_item-6" data-background="{{ model.imagePreview.path }}">
+
+    <div class="text">
+        <div class="title"><a href="{{ model.getLink() }}">{{ model.name }}</a></div>
+        <span class="price">{{ model.price }}</span>
+        {{ model.text_preview|raw }}
+        {% if model.roomsAttributesVias %}
+            <ul>
+                {% for item in model.roomsAttributesVias %}
+                    <li>{{ model.getNameAttributeById(item.attribute_id) }}: {{ item.value }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="{{ model.getLink() }}" class="awe-btn awe-btn-13">Подробнее</a>
+    </div>
+
+</div>
+<!-- END / ITEM -->

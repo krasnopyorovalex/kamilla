@@ -1,0 +1,81 @@
+<!-- GALLERY -->
+<section class="section_page-gallery">
+    <div class="container">
+        <div class="gallery">
+
+            <!-- FILTER -->
+            <div class="gallery-cat text-center for__mobile-gallery-cat">
+                <div class="title">
+                    Категории
+                <span class="fa fa-angle-down"></span>
+                </div>
+                <ul class="list-inline for__mobile-gallery-cat-hidden">
+                    <li class="active"><a href="#" data-filter="*">Все фотографии</a></li>
+                    {% for item in galleries %}
+                        <li><a href="#" data-filter=".gallery__id-{{ item.id }}">{{ item.name }}</a></li>
+                    {% endfor %}
+
+                    {% if galleriesAddMenu|length %}
+                        <li class="menu__galleries">
+                            <a href="#" class="disable__click">{{ app.params['settings']['name_gallery_menu'] }} <span class="fa fa-caret-down"></span></a>
+                                <ul>
+                                {% for item in galleriesAddMenu %}
+                                    <li><a href="#" data-filter=".gallery__id-{{ item.id }}">{{ item.name }}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- END / FILTER -->
+
+            <!-- GALLERY CONTENT -->
+            <div class="gallery-content">
+                <div class="row">
+                    <div class="gallery-isotope col-4">
+
+                        <!-- ITEM SIZE -->
+                        <div class="item-size "></div>
+                        <!-- END / ITEM SIZE -->
+
+
+                        {% for item in galleries %}
+                            {% for image in item.galleryImages %}
+                                <div class="item-isotope suite gallery__id-{{ item.id }}">
+                                    <div class="gallery_item">
+                                        <a href="/userfiles/gallery/{{ item.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.name }}">
+                                            <img src="/userfiles/gallery/{{ item.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                        </a>
+                                        {% if image.name %}
+                                            <div class="text">{{ image.name }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for item in galleriesAddMenu %}
+                            {% for image in item.galleryImages %}
+                                <div class="item-isotope suite gallery__id-{{ item.id }}">
+                                    <div class="gallery_item">
+                                        <a href="/userfiles/gallery/{{ item.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.name }}">
+                                            <img src="/userfiles/gallery/{{ item.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                        </a>
+                                        {% if image.name %}
+                                            <div class="text">{{ image.name }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- GALLERY CONTENT -->
+
+        </div>
+    </div>
+</section>
+<!-- END / GALLERY -->

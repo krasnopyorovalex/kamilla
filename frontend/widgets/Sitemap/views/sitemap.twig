@@ -1,0 +1,43 @@
+<ul class="sitemap">
+    {% for item in pages %}
+        <li>
+            <a href="{{ path('site/page', {'alias' : item.alias| replace({'index': ''})}) }}">{{ item.name }}</a>
+            {% if '{news}' in item.text %}
+                <ul>
+                    {% for item in news %}
+                        <li>
+                            <a href="{{ item.getLink() }}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if '{articles}' in item.text %}
+                <ul>
+                    {% for item in articles %}
+                        <li>
+                            <a href="{{ item.getLink() }}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if '{specials}' in item.text %}
+                <ul>
+                    {% for item in specials %}
+                        <li>
+                            <a href="{{ item.getLink() }}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if '{rooms}' in item.text %}
+                <ul>
+                    {% for item in rooms %}
+                        <li>
+                            <a href="{{ item.getLink() }}">{{ item.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

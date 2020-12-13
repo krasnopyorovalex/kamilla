@@ -1,0 +1,30 @@
+{% if not model.video %}
+<!-- BANNER SLIDER -->
+<section class="section-slider">
+    <div class="banner-slider" id="banner-slider-mob">
+    {% for image in model.carouselImagesIsMobPublish %}
+        <!-- ITEM -->
+        <div class="slider-item text-center" data-image="/userfiles/carousel/{{ model.id }}/{{ image.basename }}.{{ image.ext }}">
+            <div class="slider-text">
+                {% if image.text_top %}
+                <span class="slider-caption-sub slider-caption-sub-1" style="color: {{ image.color }}">{{ image.text_top|raw }}</span>
+                {% endif %}
+                {% if image.text_middle %}
+                <div class="slider-caption slider-caption-1" style="color: {{ image.color }}">{{ image.text_middle|raw }}</div>
+                {% endif %}
+                {% if image.text_btn %}
+                <a href="{{ image.link }}" class="awe-btn awe-btn-12 awe-btn-slider" style="color: {{ image.color }}; border-color: {{ image.color }}">{{ image.text_btn }}</a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- ITEM -->
+    {% endfor %}
+    </div>
+</section>
+<!-- END / BANNER SLIDER -->
+
+{% else %}
+    <div class="video__box">
+        <video src="{{ model.video }}" loop="loop" muted="muted" autoplay="autoplay" preload="metadata" style="width:100%; height:auto"></video>
+    </div>
+{% endif %}

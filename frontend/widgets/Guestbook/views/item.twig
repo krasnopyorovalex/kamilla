@@ -1,0 +1,18 @@
+<div class="guest-book_item guest-book_item-2">
+    <span class="icon hillter-icon-quote-left"></span>
+
+    {% if model.reviewsImages %}
+        {% for img in model.reviewsImages %}
+        <a href="/userfiles/reviews/{{ img['basename'] }}.{{ img['ext'] }}" class="avatar__link{% if loop.index == 1 %} show{% endif %}">
+            <div class="avatar">
+                <img src="/userfiles/reviews/{{ img['basename'] }}.{{ img['ext'] }}" alt="{{ img['alt'] }}" title="{{ img['title'] }}">
+            </div>
+        </a>
+        {% endfor %}
+    {% endif %}
+
+    <p>{{ model.text|striptags|raw }}</p>
+    <p class="answer">{{ model.answer|striptags|raw }}</p>
+    <span><b>{{ model.name ? model.name : '' }}</b>{{ model.city ? ' - ' ~ model.city : '' }}</span>
+    <div class="date">{{ app.formatter.asDate(model.date, 'long') }}</div>
+</div>

@@ -1,0 +1,51 @@
+<!-- GUEST BOOK -->
+<section class="section-guest-book">
+    <div class="container">
+        <div class="guest-book">
+
+            <!-- GUEST BOOK HEAD -->
+            <div class="guest-book_head guest-book_head-2 text-center">
+                <div class="text">
+                    <a href="{{ path('/load-form-guestbook') }}" class="awe-btn awe-btn-13 awe-ajax">Написать отзыв</a>
+                </div>
+            </div>
+            <!-- END / GUEST BOOK HEAD -->
+
+            <!-- GUEST BOOK MASONRY -->
+            <div class="guest-book_content">
+
+                <div class="row">
+                    <div class="guest-book_mansory">
+
+                        {{ use('yii/widgets/ListView') }}
+                        {{ list_view_widget({
+                            'dataProvider': dataProvider,
+                            'options': {'class':'list__wrapper'},
+                            'summary': false,
+                            'itemView': 'item.twig',
+                            'itemOptions': {
+                                'class': 'item-masonry col-xs-6 col-md-4'
+                            },
+                            'emptyText': app.params['emptyText'],
+                            'pager': {
+                                'options': {
+                                    'class': 'page-navigation text-center'
+                                },
+                                'prevPageCssClass': 'first',
+                                'prevPageLabel': '<i class="fa fa-arrow-left"></i>',
+                                'nextPageCssClass': 'last',
+                                'nextPageLabel': '<i class="fa fa-arrow-right"></i>',
+                                'activePageCssClass': 'current-page'
+                            }
+                        })| raw
+                        }}
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- END / GUEST BOOK MASONRY -->
+        </div>
+    </div>
+</section>
+<!-- END / GUEST BOOK -->

@@ -1,0 +1,25 @@
+{% for entity in value %}
+    {% set href = path(key|replace({'pages':'site'}) ~ '/page', {'alias': entity.alias|replace({'index':''})}) %}
+    <!-- ITEM -->
+    <div class="col-xs-3">
+        {% set image = images[entity.image_rr_id] %}
+        <div class="room_item-5" data-background='{{ image.path }}'>
+
+            <div class="img">
+                <a href="{{ href }}"><img src="{{ image.path }}" alt="{{ image.alt }}" title="{{ image.title }}"></a>
+            </div>
+
+            <div class="room_item-forward">
+                <div><a href="{{ href }}">{{ entity.name_rr }}</a></div>
+            </div>
+
+            <div class="room_item-back">
+                <div>{{ entity.name_rr }}</div>
+                <p>{{ entity.text_rr|raw }}</p>
+                <a href="{{ href }}" class="awe-btn awe-btn-13">Подробнее</a>
+            </div>
+
+        </div>
+    </div>
+    <!-- END / ITEM -->
+{% endfor %}

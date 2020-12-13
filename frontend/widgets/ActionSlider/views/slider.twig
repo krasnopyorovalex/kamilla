@@ -1,0 +1,12 @@
+{% if actions %}
+    <div class="slider__actions-title heading">Акции</div>
+    <div class="slider__actions">
+    {% for action in actions %}
+        <div class="item">
+            <a href="{{ action.getLink() }}">
+                <img src="{{ action.imageAction.path }}" alt="{{ action.imageAction.alt }}" title="{{ action.imageAction.title }}">
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

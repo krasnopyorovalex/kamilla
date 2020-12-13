@@ -1,0 +1,23 @@
+<!-- COMPARE ACCOMMODATION -->
+<div class="room-detail_compare">
+    <div class="room-compare_title">Смотреть все номера</div>
+
+    <div class="room-compare_content">
+
+        <div class="row">
+
+            {{ use('yii/widgets/ListView') }}
+            {{ list_view_widget({
+                'dataProvider': dataProvider,
+                'options': {'class':'list__wrapper rooms__carousel'},
+                'summary': false,
+                'itemView': 'item.twig',
+                'emptyText': app.params['emptyText']
+            })| raw
+            }}
+
+        </div>
+
+    </div>
+</div>
+<!-- END / COMPARE ACCOMMODATION -->

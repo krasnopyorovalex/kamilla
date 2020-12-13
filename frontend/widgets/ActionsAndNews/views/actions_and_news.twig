@@ -1,0 +1,92 @@
+<!-- HOME NEW -->
+<section class="section-event-news bg-white">
+    <div class="container">
+
+        <div class="event-news">
+            <div class="row">
+
+                {% if actions %}
+                <!-- EVENT -->
+                <div class="col-md-6">
+                    <div class="event">
+                        {{ app.params['blocks']['specials_in_main']|raw }}
+
+                        <div class="row">
+
+                            {% for item in actions %}
+                            <!-- ITEM -->
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="event-item">
+                                    <div class="img">
+                                        <a href="{{ item.getLink() }}">
+                                            <img src="{{ item.imagePreview.path }}" alt="{{ item.imagePreview.alt }}" title="{{ item.imagePreview.title }}">
+                                        </a>
+                                        {% if item.is_finished %}
+                                            <img src="/images/icon_akciya_zavershena_mp3.png" class="is__finished" alt="Акция завершена">
+                                        {% endif %}
+                                    </div>
+                                    <div class="text">
+                                        <div class="text-cn">
+                                            <div class="as_h2">{{ item.name }}</div>
+                                            <a href="{{ item.getLink() }}" class="awe-btn awe-btn-12">Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / ITEM -->
+                            {% endfor %}
+
+                        </div>
+
+                        <a href="{{ path('site/page', {'alias': 'specials'}) }}" class="awe-btn awe-btn-default">Все акции</a>
+
+                    </div>
+                </div>
+                <!-- END / EVENT -->
+                {% endif %}
+
+                {% if news %}
+                <!-- NEWS -->
+                <div class="{% if actions %}col-md-6{% else %}col-md-12{% endif %}">
+                    <div class="news">
+                        {{ app.params['blocks']['name_news_in_main']|raw }}
+                        <div class="row">
+
+                            {% for item in news %}
+                            <!-- ITEM -->
+                            <div class="{% if actions %}col-md-12{% else %}col-md-6{% endif %}">
+                                <div class="news-item">
+                                    <div class="img">
+                                        <a href="{{ item.getLink() }}">
+                                            <img src="{{ item.imagePreview.path }}" alt="{{ item.imagePreview.alt }}" title="{{ item.imagePreview.title }}">
+                                        </a>
+                                    </div>
+                                    <div class="text">
+                                        <span class="date">{{ app.formatter.asDate(item.date) }}</span>
+                                        <div><a href="{{ item.getLink() }}">{{ item.name }}</a></div>
+                                        <a href="{{ item.getLink() }}" class="read-more">[ Подробнее ]</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / ITEM -->
+                            {% endfor %}
+
+                        </div>
+
+                        <a href="{{ path('site/page', {'alias': 'news'}) }}" class="awe-btn awe-btn-default">Все новости</a>
+
+                    </div>
+
+                </div>
+                <!-- END / NEWS -->
+                {% endif %}
+
+            </div>
+
+            <div class="hr"></div>
+
+        </div>
+
+    </div>
+</section>
+<!-- END / HOME NEW -->

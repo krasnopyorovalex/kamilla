@@ -1,0 +1,32 @@
+{% if app.request.get('alias') != 'booking' %}
+<section class="section-check-availability">
+    <div class="container">
+        <div class="check-availability">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="title__wrap">
+                        <div class="title">Рассчитать стоимость</div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    {% set form = active_form_begin({
+                        'action' : '/booking',
+                        'method': 'get'
+                    }) %}
+                    <div class="availability-form">
+                        {{ form.field(model, 'date_in', {'options': {'class': 'date_in awe-calendar-wrapper'}}).textInput({'class': 'awe-calendar from date_in', 'placeholder': 'Дата заезда'}).label(false).error(false)| raw }}
+                        {{ form.field(model, 'date_out', {'options': {'class': 'date_out awe-calendar-wrapper'}}).textInput({'class': 'awe-calendar to date_out', 'placeholder': 'Дата выезда'}).label(false).error(false)| raw }}
+                        {{ form.field(model, 'count_peoples', {'options': {'class': 'count_peoples-wrapper'}}).dropDownList(model.count_peoples_list, {'class': 'awe-select','prompt': 'Кол-во чел'}).label(false).error(false)| raw }}
+
+                        <div class="vailability-submit">
+                            {{ html.submitButton('Забронировать', {'class': 'awe-btn awe-btn-333'})| raw }}
+                        </div>
+                    </div>
+                    {{ active_form_end() }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END / CHECK AVAILABILITY -->
+{% endif %}

@@ -1,0 +1,8 @@
+{% if items %}
+<div class="row recommended_reading-v1">
+    <div class="recommended_reading-title">{{ app.params['settings']['recommended_reading_title'] }}</div>
+    {% for key,value in items %}
+        {{ this.render('item.twig', {'key': key, 'value': value, 'images': images})|raw }}
+    {% endfor %}
+</div>
+{% endif %}

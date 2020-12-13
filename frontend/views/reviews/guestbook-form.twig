@@ -1,0 +1,25 @@
+{{ this.registerJsFile('https://www.google.com/recaptcha/api.js?hl=ru&amp;onload=onLoadCaptchaCallback') }}
+{% set activeForm = active_form_begin({
+    'action' : '/reviews/new-review',
+    'id': 'guestbook__form',
+    'options': {
+        'class': 'guest-book-form'
+    }
+}) %}
+<div class="title">Форма добавления отзыва</div>
+<div class="alert__box"></div>
+<!-- /.alert__box -->
+{{ activeForm.field(guestbook, 'name', {'options': {'class': 'form-field'}}).textInput({'class': 'field-text', 'placeholder': 'Имя'}).label(false)| raw }}
+{{ activeForm.field(guestbook, 'email', {'options': {'class': 'form-field'}}).textInput({'class': 'field-text', 'placeholder': 'E-mail'}).label(false)| raw }}
+{{ activeForm.field(guestbook, 'city', {'options': {'class': 'form-field'}}).textInput({'class': 'field-text', 'placeholder': 'Город'}).label(false)| raw }}
+{{ activeForm.field(guestbook, 'text', {'options': {'class': 'form-field'}}).textarea({'class': 'field-textarea', 'placeholder': 'Ваш отзыв'}).label(false)| raw }}
+
+<div class="center_block">
+    <label>Отметьте капчу *</label>
+    <div class="g-recaptcha" data-sitekey="{{ app.params['settings']['g_public_key'] }}"></div>
+</div>
+
+<div class="form-field">
+    {{ html.submitButton('Добавить', {'class': 'awe-btn awe-btn-13'})| raw }}
+</div>
+{{ active_form_end() }}

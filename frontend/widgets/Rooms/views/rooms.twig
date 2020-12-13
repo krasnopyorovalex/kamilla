@@ -1,0 +1,22 @@
+<!-- ROOM -->
+<section class="section-room bg-white">
+    <div class="container">
+
+        <div class="room-wrap-6">
+
+            {{ use('yii/widgets/ListView') }}
+            {{ list_view_widget({
+                'dataProvider': dataProvider,
+                'options': {'class':'list__wrapper'},
+                'summary': false,
+                'itemView': 'item.twig',
+                'emptyText': app.params['emptyText'],
+                'itemOptions': {'class': 'single__item'}
+            })
+            }}
+
+        </div>
+
+    </div>
+</section>
+<!-- END / ROOM -->

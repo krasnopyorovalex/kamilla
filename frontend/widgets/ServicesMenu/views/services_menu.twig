@@ -1,0 +1,71 @@
+<!-- RESTAURANTS -->
+<section class="section-restaurant-4 bg-white">
+    <div class="container">
+
+        <div class="restaurant-tabs">
+
+            <div class="tabs tabs-restaurant">
+
+                <ul>
+                    {% for item in model %}
+                    <li>
+                        <a href="#tabs-{{ item.id }}">
+                            {{ item.name }}
+                            <span>{{ item.slogan }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                {% for item in model %}
+                    <div id="tabs-{{ item.id }}">
+
+                        <div class="restaurant_content">
+                            <div class="row">
+
+                                {% for subItem in item.servicesMenuCategoriesItems %}
+                                <!-- ITEM -->
+                                <div class="col-md-6">
+                                    <div class="restaurant_item small-thumbs">
+
+                                        {% if subItem.image %}
+                                        <div class="img">
+                                            {% set link = subItem.image_link ? subItem.image_link : subItem.image.path %}
+                                            {% set css = (subItem.image.path and not subItem.image_link) ? 'gallery__item' : '' %}
+                                            <a href="{{ link }}" class="{{ css }}">
+                                                <img src="{{ subItem.image.path }}" alt="{{ subItem.image.alt }}" title="{{ subItem.image.title }}">
+                                            </a>
+                                        </div>
+                                        {% endif %}
+
+                                        <div class="text">
+
+                                            {% if subItem.name_link %}<a href="{{ subItem.name_link }}">{% endif %}
+                                                <div class="title">{{ subItem.name }}</div>
+                                            {% if subItem.name_link %}</a>{% endif %}
+
+                                            <p class="desc">{{ subItem.text|raw }}</p>
+
+                                            <div class="price">
+                                                {{ subItem.price|raw }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- END / ITEM -->
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END / RESTAURANTS -->

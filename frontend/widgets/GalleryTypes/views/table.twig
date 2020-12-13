@@ -1,0 +1,34 @@
+<!-- GALLERY -->
+<section class="section-gallery bg-white">
+
+    <div class="gallery  no-padding">
+        <div class="heading text-center">{{ gallery.name }}</div>
+
+        <!-- GALLERY CONTENT -->
+        <div class="gallery-content">
+            <div class="row">
+                <div class="gallery-isotope col-6 pd-0">
+
+                    <!-- ITEM SIZE -->
+                    <div class="item-size"></div>
+                    <!-- END / ITEM SIZE -->
+
+                    {% for image in gallery.galleryImages %}
+                        <div class="item-isotope item-isotope suite">
+                            <div class="gallery_item">
+                                <a href="/userfiles/gallery/{{ gallery.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.title }}">
+                                    <img src="/userfiles/gallery/{{ gallery.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+        <!-- GALLERY CONTENT -->
+
+    </div>
+</section>
+<!-- END / GALLERY -->

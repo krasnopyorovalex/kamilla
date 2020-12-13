@@ -1,0 +1,105 @@
+{{ this.registerJsFile('https://www.google.com/recaptcha/api.js?hl=ru&amp;onload=onLoadCaptchaCallback') }}
+
+{% if model.image %}
+<section class="section-reservation awe-parallax" style="background-image: url('{{ model.image.path }}')">
+    <div class="container">
+        <div class="reservation">
+            <div class="reservation_form">
+                <div class="row">
+{% endif %}
+                    <div class="alert__box"></div>
+                    <!-- /.alert__box -->
+{{ html.beginForm(url.toRoute('form/' ~ model.type), 'post', {
+    'class': model.css,
+    'id': model.sys_name,
+    'enctype': 'multipart/form-data',
+    'onsubmit': model.event
+}) | raw }}
+{{ html.hiddenInput('sys_name', model.sys_name) |raw }}
+{% if model.show_name %}
+    <div class="form__title">{{ model.name }}</div>
+{% endif %}
+
+                    {{ app.request.get('check_in') }}
+
+{% for key, item in schema %}
+    {% set id = app.getSecurity.generateRandomString(15) %}
+    {% if item.className == 'date_in' or item.className == 'date_out' %}
+        <div class="single__block form-group {{ item.className }} {% if item.required %}required{% endif %}">
+            {% if item.label %}
+                {{ html.label(item.label, id) | raw }}
+            {% endif %}
+            {{ html.input('text', key, requestData[item.className], {
+                'class': item.className,
+                'required': item.required,
+                'id': id,
+                'placeholder': item.placeholder
+            }) | raw }}
+            <span class="hillter-icon-calendar"></span>
+        </div>
+    {% elseif item.type == 'input' %}
+        <div class="single__block{% if item.required %} required{% endif %}">
+            {% if item.label %}
+                {{ html.label(item.label, id) | raw }}
+            {% endif %}
+            {% set type = item.className == "email" ? "email" : "text" %}
+            {{ html.input('text', key, '', {'type': type, 'class': item.className, 'id': id, 'required': item.required, 'placeholder': item.placeholder, 'autocomplete': 'off'}) | raw }}
+        </div>
+    {% elseif item.type == 'textarea' %}
+        <div class="message {% if item.required %}required{% endif %}">
+            {% if item.label %}
+                {{ html.label(item.label, id) | raw }}
+            {% endif %}
+            {{ html.textarea(key, app.session.getFlash(key), {'class': item.className,'required': item.required,'id': id,'placeholder': item.placeholder}) | raw }}
+        </div>
+    {% elseif item.type == 'select' %}
+        <div class="single__block {{ item.className }}{% if item.required %} required{% endif %}">
+            {% if item.label %}
+                {{ html.label(item.label, id) | raw }}
+            {% endif %}
+            {% set requestValue = '' %}
+            {% if item.className == 'count_peoples' %}
+                {% set requestValue = requestData[item.className] %}
+            {% endif %}
+            {{ html.dropDownList(key, requestValue, appHelper.dropDownList(item.options), { 'id': id }) | raw }}
+        </div>
+    {% elseif item.type == 'radio' %}
+        {% if item.label %}
+            {{ html.label(item.label, id) | raw }}
+        {% endif %}
+        {{ appHelper.radioList(item.options,key) | raw }}
+    {% elseif item.type == 'checkbox' %}
+        {% if item.label %}
+            {{ html.label(item.label, id) | raw }}
+        {% endif %}
+        {{ appHelper.checkboxList(item.options,key) | raw }}
+    {% endif %}
+{% endfor %}
+
+{% if model.images_on %}
+    {{ html.label('Выберите одно или несколько изображений', 'images_field') | raw }}
+    {{ html.fileInput('images[]', 'images_field', {'id': 'images_field', 'multiple': true, 'accept': 'image/*' }) | raw }}
+{% endif %}
+
+{% if model.captcha %}
+    <div class="captcha_box">
+        <label>Отметьте капчу *</label>
+        <div class="g-recaptcha" id="re__{{ model.sys_name }}" data-sitekey="{{ app.params['settings']['g_public_key'] }}"></div>
+    </div>
+{% endif %}
+
+<div class="required required__info">* - поля обязательны для заполнения</div>
+<div class="required required__info">** фактом отправки заявки подтверждаете, что ознакомлены с условиями проживания и политикой конфиденциальности</div>
+
+{{ html.submitButton(model.submit_btn_text, {'class': 'awe-btn awe-btn-333'}) | raw }}
+
+{{ html.endForm() | raw }}
+
+{% if model.image %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END / RESERVATION -->
+{% endif %}

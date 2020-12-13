@@ -1,0 +1,43 @@
+<!-- GALLERY -->
+<section class="section-gallery bg-white">
+
+    <div class="gallery  no-padding">
+     {% if not showBtn %}
+        {{ app.params['blocks']['name_gallery_in_main']|raw }}
+        {% endif %}
+        
+        <!-- GALLERY CONTENT -->
+        <div class="gallery-content">
+            <div class="row">
+                <div class="gallery-carousel col-6 pd-0">
+
+                    {% for item in galleries %}
+                        {% for image in item.galleryImages %}
+                        <div class="item-isotope item-isotope suite gallery__id-{{ item.id }}">
+                            <div class="gallery_item">
+                                <a href="/userfiles/gallery/{{ item.id }}/{{ image.basename }}.{{ image.ext }}" class="gallery-popup mfp-image" title="{{ image.name }}">
+                                    <img src="/userfiles/gallery/{{ item.id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}">
+                                </a>
+                                {% if image.name %}
+                                    <div class="text">{{ image.name }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                </div>
+            </div>
+            
+            {% if not showBtn %}
+            <div class="our-gallery text-center">
+                <a href="{{ path('site/page', {'alias': 'gallery'}) }}" class="awe-btn awe-btn-default">Перейти к галерее</a>
+            </div>
+            {% endif %}
+
+        </div>
+        <!-- GALLERY CONTENT -->
+
+    </div>
+</section>
+<!-- END / GALLERY -->

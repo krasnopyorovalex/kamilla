@@ -1,0 +1,39 @@
+<!-- ACTIVITI -->
+<section class="section-activiti bg-white">
+    <div class="container">
+
+        <div class="activiti">
+
+            <div class="activiti_content">
+
+                <div class="row">
+
+                    {{ use('yii/widgets/ListView') }}
+                    {{ list_view_widget({
+                        'dataProvider': dataProvider,
+                        'options': {'class':'list__wrapper news'},
+                        'summary': false,
+                        'itemView': 'item.twig',
+                        'emptyText': app.params['emptyText'],
+                        'pager': {
+                            'options': {
+                                'class': 'page-navigation text-center'
+                            },
+                            'prevPageCssClass': 'first',
+                            'prevPageLabel': '<i class="fa fa-arrow-left"></i>',
+                            'nextPageCssClass': 'last',
+                            'nextPageLabel': '<i class="fa fa-arrow-right"></i>',
+                            'activePageCssClass': 'current-page'
+                        }
+                    })| raw
+                    }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- END / ACTIVITI -->

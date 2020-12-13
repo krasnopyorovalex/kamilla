@@ -1,0 +1,23 @@
+<ul class="{{ css }}">
+    {% for item in model %}
+    <li {% if app.request.url == item.link %}class="current-menu-item"{% endif %}>
+        <a href="{{ item.link }}">{{ item.name }}{% if item.menuItems %} <span class="fa fa-caret-down"></span>{% endif %}</a>
+        {% if item.menuItems %}
+            <ul class="sub-menu">
+                {% for menuItem in item.menuItems %}
+                <li {% if app.request.url == menuItem.link %}class="current-menu-item"{% endif %}>
+                    <a href="{{ menuItem.link }}">{{ menuItem.name }}{% if menuItem.menuItems %} <span class="fa fa-caret-right"></span>{% endif %}</a>
+                    {% if menuItem.menuItems %}
+                    <ul class="sub-menu">
+                        {% for subMenuItem in menuItem.menuItems %}
+                            <li><a href="{{ subMenuItem.link }}">{{ subMenuItem.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>

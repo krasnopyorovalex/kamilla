@@ -1,0 +1,182 @@
+{{ set(this, 'title', model.title) }}
+{{ this.registerMetaTag({'name':'description', 'content': model.description}) }}
+{{ this.registerMetaTag({'name':'keywords', 'content': model.keywords}) }}
+
+<!-- SUB BANNER -->
+<section class="section-sub-banner awe-parallax{% if not model.image.path %} not__bg{% endif %}" {% if model.image %}style="background-image: url('{{ model.image.path }}');"{% endif %}>
+
+    {% if not app.mobileDetect.isMobile() and model.video %}
+        <div class="video__box-bg">
+            <video loop="loop" muted="muted" autoplay="autoplay" preload="metadata" style="width:100%; height:auto">
+                <source src="{{ model.video }}" type="video/mp4">
+            </video>
+        </div>
+    {% endif %}
+    
+    <div class="awe-overlay with-bg"></div>
+    <div class="sub-banner">
+        <div class="container">
+            <div class="text text-center">
+
+                <h1>{{ model.name }}</h1>
+
+                {% if model.slogan %}
+                    <p>{{ model.slogan }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- END / SUB BANNER -->
+
+{% if app.params['settings']['view_booking_block']%}
+    {{ use('frontend/widgets/CheckBooking/CheckBooking') }}
+    {{ check_booking_widget() }}
+{% endif %}
+
+<!-- ROOM DETAIL -->
+<section class="section-room-detail bg-white">
+    <div class="container">
+
+        <!-- DETAIL -->
+        <div class="room-detail">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a href="{{ app.homeUrl() }}">{{ app.params['bread_first_item_text'] }}</a></li>
+                            <li><a href="{{ path('site/page', {'alias': app.params['catalogAlias']}) }}">Номера</a></li>
+                            <li>{{ model.name }}</li>
+                        </ul>
+                    </div>
+                    <!-- /.breadcrumbs -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+
+                    {% if model.gallery %}
+                    <!-- LAGER IMGAE -->
+                    <div class="room-detail_img">
+                        {% for item in model.gallery.galleryImages %}
+                        <div class="room_img-item">
+                            <img src="/userfiles/gallery/{{ item.gallery_id }}/{{ item.basename }}.{{ item.ext }}" alt="{{ item.alt }}" title="{{ item.title }}">
+                            {% if item.name %}
+                            <div class="title">{{ item.name }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- END / LAGER IMGAE -->
+
+                    <!-- THUMBNAIL IMAGE -->
+                    <div class="room-detail_thumbs">
+                        {% for item in model.gallery.galleryImages %}
+                        <a href="#"><img src="/userfiles/gallery/{{ item.gallery_id }}/{{ item.basename }}_thumb.{{ item.ext }}" alt="{{ item.alt }}"></a>
+                        {% endfor %}
+                    </div>
+                    <!-- END / THUMBNAIL IMAGE -->
+                    {% endif %}
+
+                </div>
+
+                <div class="col-lg-3 hidden-xs">
+
+                    <!-- FORM BOOK -->
+                    <div class="room-detail_book">
+
+                        <div class="room-detail_form">
+                            {{ use('frontend/widgets/CreateForm/CreateForm') }}
+                            {{ create_form_widget({'sysName': 'form_room_booking'}) }}
+                        </div>
+
+                    </div>
+                    <!-- END / FORM BOOK -->
+
+                </div>
+            </div>
+        </div>
+        <!-- END / DETAIL -->
+
+        <!-- TAB -->
+        <div class="room-detail_tab">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="room-detail_tab-header">
+                        <li class="active"><a href="#overview" data-toggle="tab">Цена</a></li>
+                        {% for item in model.tabs %}
+                            <li><a href="#tab__{{ item.id }}" data-toggle="tab">{{ item.name }}</a></li>
+                        {% endfor %}
+                        <li><a href="#form_ask_question-box" data-toggle="tab">Задать нам вопрос</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="room-detail_tab-content tab-content">
+
+                        <!-- OVERVIEW -->
+                        <div class="tab-pane fade active in" id="overview">
+
+                            <div class="room-detail_overview">
+                                {{ model.text|raw }}
+                            </div>
+
+                        </div>
+                        <!-- END / OVERVIEW -->
+
+                        {% for item in model.roomsTabsVias %}
+                            <!-- AMENITIES -->
+                            <div class="tab-pane fade" id="tab__{{ item.tab_id }}">
+
+                                <div class="room-detail_amenities">
+                                    {{ item.value|raw }}
+                                </div>
+
+                            </div>
+                            <!-- END / AMENITIES -->
+                        {% endfor %}
+
+                        <div class="tab-pane fade" id="form_ask_question-box">
+
+                            <div class="room-detail_amenities">
+                                {{ create_form_widget({'sysName': 'form_ask_question'}) }}
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- END / TAB -->
+
+        <div class="room-detail room-detail-mobile">
+            <div class="row">
+                <div class="col-lg-3 visible-xs">
+
+                    <!-- FORM BOOK -->
+                    <div class="room-detail_book">
+
+                        <div class="room-detail_form">
+                            {{ use('frontend/widgets/CreateForm/CreateForm') }}
+                            {{ create_form_widget({'sysName': 'form_room_booking'}) }}
+                        </div>
+
+                    </div>
+                    <!-- END / FORM BOOK -->
+
+                </div>
+            </div>
+        </div>
+
+        {{ use('frontend/widgets/OtherRooms/OtherRooms') }}
+        {{ other_rooms_widget({'model': model}) }}
+
+    </div>
+</section>
+<!-- END / SHOP DETAIL -->

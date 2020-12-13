@@ -1,0 +1,38 @@
+{{ set(this, 'title', app.params['title_404']) }}
+
+<!-- ABOUT -->
+<section class="section-error">
+    <div class="container">
+        <div class="about">
+
+            <div class="breadcrumbs">
+                <ul>
+                    <li><a href="{{ app.homeUrl() }}">{{ app.params['bread_first_item_text'] }}</a></li>
+                    <li>{{ app.params['title_404'] }}</li>
+                </ul>
+            </div>
+            <!-- /.breadcrumbs -->
+        </div>
+    </div>
+</section>
+<!-- END / ABOUT -->
+
+<div class="not-found">
+	<img src="/images/oops-404.jpg" alt="" title="">
+	<div class="not-found-text">
+		<p>Уважаемый гость!</p>
+    	<p>Мы предполагаем, что страница еще не создана или случилась техническая накладка… Приносим свои извинения!</p>
+    	<h2>Можем Вам предложить:</h2>
+    	<ul>
+    		<li>
+    			<a href="/tseniy">Ознакомиться с ценами</a>
+    		</li>
+    		<li>
+    			<a href="/rooms">Посмотреть наши номера</a>
+    		</li>
+    		<li>
+    			<a href="/">Вернуться на главную</a>
+    		</li>
+    	</ul>
+	</div>
+</div>

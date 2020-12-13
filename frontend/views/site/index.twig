@@ -1,0 +1,155 @@
+{{ set(this, 'title', model.title) }}
+{{ this.registerMetaTag({'name':'description', 'content': model.description}) }}
+{{ this.registerMetaTag({'name':'keywords', 'content': model.keywords}) }}
+
+{% if app.params['settings']['show_slider'] and model.carousel_id %}
+    {{ use('frontend/widgets/Carousel/Carousel') }}
+    {{ carousel_widget({'model': model.carousel}) }}
+{% endif %}
+
+{% if app.params['settings']['view_booking_block']%}
+    {{ use('frontend/widgets/CheckBooking/CheckBooking') }}
+    {{ check_booking_widget() }}
+{% endif %}
+
+{% if app.params['settings']['form_recall_block']%}
+
+<section class="section-check-availability">
+    <div class="container">
+        <div class="check-availability">
+            <div class="row">
+                <div class="col-lg-12">
+                    {{ use('frontend/widgets/CreateForm/CreateForm') }}
+    				{{ create_form_widget({'sysName': 'form_recall'}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END / CHECK AVAILABILITY -->
+{% endif %}
+
+{% if app.params['settings']['show_slider_actions']%}
+    {{ use('frontend/widgets/ActionSlider/ActionSlider') }}
+    {{ action_slider_widget() }}
+{% endif %}
+
+{% if app.params['blocks']['text_after_slider'] %}
+    <!-- ABOUT -->
+    <section class="section-home-about bg-white intro__text">
+        <div class="container">
+            <div class="home-about">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="img">
+                            {{ app.params['blocks']['text_after_slider']|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END / ABOUT -->
+{% endif %}
+
+{{ use('frontend/widgets/RoomsMainForPage/RoomsMainForPage') }}
+{{ rooms_main_for_page_widget() }}
+
+{% if app.params['blocks']['image_left_about'] or app.params['blocks']['about_in_main'] %}
+<!-- ABOUT -->
+<section class="section-home-about bg-white">
+    <div class="container">
+        <div class="home-about">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img">
+                        {{ app.params['blocks']['image_left_about']|raw }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text">
+                        {{ app.params['blocks']['about_in_main']|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END / ABOUT -->
+{% endif %}
+
+<!-- OUR BEST -->
+<section class="section-our-best bg-white">
+    <div class="container">
+
+        <div class="our-best">
+            <div class="row">
+
+                <div class="col-md-6 col-md-push-6">
+                    <div class="img">
+                        {{ app.params['blocks']['image_right_advantages']|raw }}
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-md-pull-6">
+                    <div class="text">
+                        {{ app.params['blocks']['advantages_in_main']|raw }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END / OUR BEST -->
+
+{% if app.params['blocks']['another_block_image'] or app.params['blocks']['another_block'] %}
+<section class="section-home-about bg-white">
+    <div class="container">
+        <div class="home-about">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img">
+                        {{ app.params['blocks']['another_block_image']|raw }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text">
+                        {{ app.params['blocks']['another_block']|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- OUR BEST -->
+<section class="section-our-best bg-white">
+    <div class="container">
+
+        <div class="our-best">
+            <div class="row">
+
+                <div class="col-md-12">
+                   {{ model.text|raw }}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END / OUR BEST -->
+
+{{ use('frontend/widgets/GuestbookMainPage/GuestbookMainPage') }}
+{{ guestbook_main_page_widget() }}
+
+{{ use('frontend/widgets/ActionsAndNews/ActionsAndNews') }}
+{{ actions_and_news_widget() }}
+
+{% if model.galleries %}
+{{ use('frontend/widgets/Gallery/Gallery') }}
+{{ gallery_widget({'ids': model.galleries}) }}
+{% endif %}
