@@ -1898,7 +1898,6 @@
             tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
 
         }
-
     });
 
 
