@@ -2,15 +2,17 @@
 
 namespace backend\components;
 
+use common\models\GalleryImages;
 use Yii;
 use yii\base\Action;
-use yii\web\UploadedFile;
-use common\models\GalleryImages;
-use yii\imagine\Image;
 use yii\helpers\FileHelper;
+use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 class Multiupload extends Action
 {
+    const DELIMITER = '/';
+
     /**
      * @return bool
      * @throws \yii\base\Exception
@@ -33,6 +35,9 @@ class Multiupload extends Action
             //thumb
             Image::thumbnail($path . $image->basename . '.' . $image->ext, 450, 225)
                 ->save($path . $image->basename . '_thumb.' . $image->ext, ['quality' => 100]);
+            //for price
+            Image::thumbnail($path . $image->basename . '.' . $image->ext, 470, 265)
+                ->save($path . $image->basename . '_price.' . $image->ext, ['quality' => 100]);
             return true;
         }
         return false;

@@ -1,0 +1,33 @@
+
+
+	новый файл:    frontend/controllers/PriceController.php +
+	новый файл:    frontend/views/price/get-price-popup.twig +
+	новый файл:    frontend/web/css/main.min.css +
+	
+	новый файл:    frontend/web/fonts/Arial MT Bold.woff +
+	новый файл:    frontend/web/fonts/Arial MT Bold.woff2 +
+	новый файл:    frontend/web/img/back.png +
+
+	новый файл:    frontend/widgets/Price/views/price_mobile.twig +
+
+Изменения, которые не в индексе для коммита:
+  (используйте «git add/rm <файл>…», чтобы добавить или удалить файл из индекса)
+  (use "git restore <file>..." to discard changes in working directory)
+	изменено:      backend/components/Multiupload.php +
+	изменено:      backend/controllers/ModuleController.php +
+	изменено:      backend/modules/price/controllers/DefaultController.php +
+
+	изменено:      backend/views/blocks/_left_sidebar.php +
+	изменено:      common/models/GalleryImages.php +
+	изменено:      common/models/Price.php +
+	изменено:      common/models/PriceDatesVia.php +
+	изменено:      common/models/PriceSettings.php +
+	изменено:      console/migrations/m201213_082112_change_price.php +
+	изменено:      frontend/assets/AppAsset.php +
+	изменено:      frontend/components/ParserBehavior.php +
+	изменено:      frontend/config/main.php +
+
+	изменено:      frontend/views/price/get-price-popup.twig +
+	
+	изменено:      frontend/web/js/scripts.js +
+

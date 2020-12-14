@@ -1,0 +1,117 @@
+{% for item in attributes_price %}
+<div class="price-table">
+    <div class="price-table-name">{{ settings.col_name_mob|raw }}</div>
+    <div class="price-table-slider-description">
+        {% if item.gallery.galleryImages %}
+            <div class="slider-box gallery">
+                <div class="slider">
+                    {% for image in item.gallery.galleryImages %}
+                        <div class="slider-item">
+                            <a href="{{ item.room.getLink() }}" class="title">{{ item.name }}</a>
+                            <a href="/userfiles/gallery/{{ image.gallery_id }}/{{ image.basename }}.{{ image.ext }}">
+                                <img src="{{ image.getForPrice() }}" alt="{{ image.alt }}" title="{{image.title }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="description">
+            <div class="square">
+                <svg class="icon icon-square">
+                    <use xlink:href="../img/sprites/sprite.svg#square"></use>
+                </svg>
+                <span>{{ item.square}} м<sup>2</sup></span>
+                <img src="/userfiles/price_icons/{{ item.image }}" class="icon icon-people" alt="{{ item.name }}">
+            </div>
+            <div class="include">
+                {{ item.description|raw }}
+                <div class="include-item">
+                    <a href="{{ path('site/page', {'alias' : 'booking'}) }}#{{ item.name }}" class="btn-booking">
+                        Отправить запрос
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="price-table-info">
+        <table>
+            <thead>
+            <tr>
+                {% for item in attributes_array %}
+                    <th>{{ item.name }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for price in item.priceDatesVias %}
+                    <td>
+                        {% if price.popup %}
+                            <a href="{{ path('price/get-price-popup', {'priceId': price.price_id, 'priceDateId': price.price_dates_id}) }}" class="as-link awe-ajax">{{ price.value| raw }}</a>
+                        {% else %}
+                            <div class="as-link">{{ price.value| raw }}</div>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endfor %}
+
+<table class="table__price hidden-xs" cellspacing="0">
+    <tr>
+        <th>Номера</th>
+        {% for item in attributes_array %}
+            <th>{{ item.name }}</th>
+        {% endfor %}
+    </tr>
+    {% for item in attributes_price %}
+        <tr>
+            <td>
+                <div class="title">
+                    <img src="/userfiles/price_icons/{{ item.image }}" alt="{{ item.name }}">
+                    <a href="{{ item.room.getLink() }}">{{ item.name }}</a>
+                </div>
+                <div class="desc">
+                    {{ item.description| raw }}
+                </div>
+                {% if item.gallery.galleryImages %}
+                    <div class="gallery">
+                        {% for image in item.gallery.galleryImages %}
+                            <a href="/userfiles/gallery/{{ image.gallery_id }}/{{ image.basename }}.{{ image.ext }}">
+                                <img src="/userfiles/gallery/{{ image.gallery_id }}/{{ image.basename }}_thumb.{{ image.ext }}" alt="{{ image.alt }}" title="{{image.title }}">
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="btn__box-order">
+                    <div><a href="{{ path('site/page', {'alias' : 'booking'}) }}#{{ item.name }}">Отправить запрос</a></div>
+                </div>
+                <!-- /.btn__box-order -->
+            </td>
+            {% for price in item.priceDatesVias %}
+                <td>{{ price.value| raw }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+<style>
+    .price-table .btn-booking {
+        background-color: {{ settings.color_head_btn }}
+    }
+    .price-table td:nth-child(2n+1), .price-table th:nth-child(2n+1) {
+        background-color: {{ settings.color_fourth }}
+    }
+    .price-table td:nth-child(2n), .price-table th:nth-child(2n) {
+        background-color: {{ settings.color_five }}
+    }
+    {% if settings.color_border %}
+    .price-table th,.price-table td {
+        border: 1px solid{{ settings.color_border }}
+    }
+    {% endif %}
+</style>

@@ -81,11 +81,24 @@ class GalleryImages extends \yii\db\ActiveRecord
         if (parent::beforeDelete()) {
             $path = Yii::getAlias('@frontend'.self::PATH . $this->gallery_id . DIRECTORY_SEPARATOR);
             unlink($path . $this->basename .'.'. $this->ext);
-            unlink($path . $this->basename .'_thumb.'. $this->ext);
+            @unlink($path . $this->basename .'_thumb.'. $this->ext);
+            @unlink($path . $this->basename .'_price.'. $this->ext);
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * @return string|string[]
+     */
+    public function getForPrice()
+    {
+        $forPrice = "/userfiles/gallery/{$this->gallery_id}/{$this->basename}_price.{$this->ext}";
+
+        return file_exists(Yii::getAlias('@frontend/web' . $forPrice))
+            ? $forPrice
+            : str_replace('_price', '_thumb', $forPrice);
     }
 
     public function copyImage($gallery_id)

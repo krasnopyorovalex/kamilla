@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->context->actions[$this->context->action-
                                         </div>
                                     <?php endif;?>
                                     <?= $form->field($model, 'file')->fileInput(['accept' => 'image/*']) ?>
+                                    <?= $form->field($model, 'square')->textInput() ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -67,11 +68,22 @@ $this->params['breadcrumbs'][] = $this->context->actions[$this->context->action-
                                     <?php if($attributes_array):?>
                                         <?= Html::beginTag('div', ['class' => 'attributes_product'])?>
                                         <?php foreach ($attributes_array as $aa):?>
-                                            <?= $form->field($model, 'attrArray['.$aa['id'].']')->textarea([
-                                                'value' => isset($attributes_price[$aa['id']])
-                                                    ? $attributes_price[$aa['id']]
-                                                    : ''
-                                            ])->label($aa['name'])?>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <?= $form->field($model, 'attrArray['.$aa['id'].']')->textarea([
+                                                       'value' => isset($attributes_price[$aa['id']])
+                                                           ? $attributes_price[$aa['id']]
+                                                           : ''
+                                                   ])->label($aa['name'])?>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <?= $form->field($model, 'attrPopupArray['.$aa['id'].']')->textarea([
+                                                       'value' => isset($attributes_popup[$aa['id']])
+                                                           ? $attributes_popup[$aa['id']]
+                                                           : ''
+                                                   ])->label('Для всплывающего окна')?>
+                                                </div>
+                                            </div>
                                         <?php endforeach;?>
                                         <?= Html::endTag('div')?>
                                     <?php endif;?>

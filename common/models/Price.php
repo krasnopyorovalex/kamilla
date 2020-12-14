@@ -28,6 +28,7 @@ class Price extends \yii\db\ActiveRecord
 
     public $file;
     public $attrArray;
+    public $attrPopupArray;
 
     /**
      * @inheritdoc
@@ -56,12 +57,14 @@ class Price extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['description'], 'string'],
-            [['gallery_id', 'pos'], 'integer'],
+            [['gallery_id', 'pos', 'square'], 'integer'],
             [['name'], 'string', 'max' => 128],
             [['image'], 'string', 'max' => 512],
             [['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rooms::className(), 'targetAttribute' => ['room_id' => 'id']],
             [['gallery_id'], 'exist', 'skipOnError' => true, 'targetClass' => Gallery::className(), 'targetAttribute' => ['gallery_id' => 'id']],
-            ['attrArray', 'safe']
+            ['attrArray', 'safe'],
+            ['attrPopupArray', 'safe'],
+            ['square', 'default', 'value' => 0]
         ];
     }
 
@@ -78,7 +81,8 @@ class Price extends \yii\db\ActiveRecord
             'file' => 'Иконка',
             'gallery_id' => 'Галерея прайса',
             'pos' => 'Позиция',
-            'room_id' => 'Ссылка на номер'
+            'room_id' => 'Ссылка на номер',
+            'square' => 'Площадь номера'
         ];
     }
 
@@ -121,14 +125,17 @@ class Price extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-        if($this->attrArray){
+        if ($this->attrArray) {
             $this->unlinkAll('priceDates', true);
-            foreach ($this->attrArray as $key => $value){
-                (new PriceDatesVia([
-                    'price_id' => $this->id,
-                    'price_dates_id' => $key,
-                    'value' => $value
-                ]))->save();
+            foreach ($this->attrArray as $key => $value) {
+                (new PriceDatesVia(
+                    [
+                        'price_id' => $this->id,
+                        'price_dates_id' => $key,
+                        'value' => $value,
+                        'popup' => isset($this->attrPopupArray[$key]) ? $this->attrPopupArray[$key] : ''
+                    ]
+                ))->save();
             }
         }
         parent::afterSave($insert, $changedAttributes);

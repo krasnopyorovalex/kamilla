@@ -54,6 +54,7 @@ class DefaultController extends ModuleController
         return $this->render('form',[
             'model' => new $model,
             'attributes_price' => [],
+            'attributes_popup' => [],
             'attributes_array' => PriceDates::find()->asArray()->all(),
             'galleries' => ArrayHelper::map(Gallery::find()->asArray()->all(),'id','name'),
             'rooms' => ArrayHelper::map(Rooms::find()->asArray()->all(),'id','name')
@@ -73,6 +74,7 @@ class DefaultController extends ModuleController
         return $this->render('form',[
             'model' =>  $model,
             'attributes_price' => ArrayHelper::map($model['priceDatesVias'], 'price_dates_id', 'value'),
+            'attributes_popup' => ArrayHelper::map($model['priceDatesVias'], 'price_dates_id', 'popup'),
             'attributes_array' => PriceDates::find()->asArray()->all(),
             'galleries' => ArrayHelper::map(Gallery::find()->asArray()->all(),'id','name'),
             'rooms' => ArrayHelper::map(Rooms::find()->asArray()->all(),'id','name')
@@ -94,6 +96,7 @@ class DefaultController extends ModuleController
         return $this->render('form', [
             'model' => $model,
             'attributes_price' => ArrayHelper::map($model['priceDatesVias'], 'price_dates_id', 'value'),
+            'attributes_popup' => ArrayHelper::map($model['priceDatesVias'], 'price_dates_id', 'popup'),
             'attributes_array' => PriceDates::find()->asArray()->all(),
             'galleries' => ArrayHelper::map(Gallery::find()->asArray()->all(),'id','name'),
             'rooms' => ArrayHelper::map(Rooms::find()->asArray()->all(),'id','name')

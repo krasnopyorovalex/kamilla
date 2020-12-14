@@ -250,11 +250,12 @@
                                 <li>Отзывы - {guestbook}</li>
                                 <li>Статьи - {articles}</li>
                                 <li>Таблица цен - {module_price}</li>
-                                <li>Спецпредложения - {specials}</li>
+                                <li>Таблица цен с необходимыми прайсами - {module_price_2_34_12}, где цифры id прайсов</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul>
+                                <li>Спецпредложения - {specials}</li>
                                 <li>Рекомендуем к прочтению - {articles_list}</li>
                                 <li>Блок-статистика - {stat}</li>
                                 <li>Список номеров - {rooms}</li>

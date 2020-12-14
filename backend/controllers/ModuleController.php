@@ -59,6 +59,8 @@ class ModuleController extends SiteController implements IActions
         if(!$this->_model){
             throw new \ErrorException('Не реализован метод getModels() у модуля');
         }
+
+        parent::init();
     }
 
     /**

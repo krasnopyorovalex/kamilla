@@ -1806,7 +1806,7 @@
 
 
 
-    $('.table__price .gallery').each(function() { // the containers for all your galleries
+    $('.table__price .gallery, .price-table .gallery').each(function() { // the containers for all your galleries
 
         $(this).magnificPopup({
 
@@ -1832,6 +1832,39 @@
 
     });
 
+    const slider = $('.price-table .slider');
+    if (slider.length) {
+        slider.each(function () {
+            const $this = $(this);
+            $this.owlCarousel({
+                autoPlay: false,
+                singleItem: true,
+                smartSpeed: 1000,
+                navigation: true,
+                pagination: false,
+                navigationText: ['<i class="tps-arrow left"></i>', '<i class="tps-arrow right"></i>']
+            });
+        });
+
+        const priceTable =  $('.price-table');
+
+        priceTable.on('mouseover', 'table td, table th', function (){
+            const cellIndex = $(this)[0].cellIndex;
+            if (cellIndex > 1) {
+                $(this).closest('table').find('tr').each(function () {
+                    return $(this).find('td,th').each(function () {
+                        if ($(this)[0].cellIndex === cellIndex) {
+                            return $(this).addClass('hovered');
+                        }
+                    });
+                });
+            }
+        });
+
+        priceTable.on('mouseout', 'table td, table th', function () {
+            $(this).closest('table').find('td,th').removeClass('hovered');
+        });
+    }
 
 
     jQuery('.guest-book_item a, a.colorbox').magnificPopup({

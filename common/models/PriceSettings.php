@@ -31,7 +31,8 @@ class PriceSettings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['color_head_btn', 'color_first', 'color_second', 'color_third', 'color_fourth', 'color_border'], 'string', 'max' => 7],
+            [['color_head_btn', 'color_first', 'color_second', 'color_third', 'color_fourth', 'color_five', 'color_border'], 'string', 'max' => 7],
+            [['col_name', 'col_name_mob'], 'string']
         ];
     }
 
@@ -42,12 +43,15 @@ class PriceSettings extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'color_head_btn' => 'Цвет шапки и кнопки',
-            'color_first' => 'Первый цвет фона таблицы',
-            'color_second' => 'Второй цвет фона таблицы',
-            'color_third' => 'Третий цвет фона таблицы',
-            'color_fourth' => 'Четвертый цвет фона таблицы',
+            'color_head_btn' => 'Цвет кнопки',
+            'color_first' => 'Фон шапки первого и второго столбцов таблицы',
+            'color_second' => 'Фон шапки второго столбца таблицы',
+            'color_third' => 'Цвет фона столбца справа от слайдера',
+            'color_fourth' => 'Первый цвет фона таблицы',
+            'color_five' => 'Второй цвет фона таблицы',
             'color_border' => 'Цвет границ таблицы',
+            'col_name' => 'Название столбца',
+            'col_name_mob' => 'Название столбца в мобильной версии',
         ];
     }
 }

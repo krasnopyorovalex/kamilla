@@ -10,6 +10,7 @@ use Yii;
  * @property integer $price_id
  * @property integer $price_dates_id
  * @property string $value
+ * @property string $popup
  *
  * @property Price $price
  * @property PriceDates $priceDates
@@ -33,6 +34,7 @@ class PriceDatesVia extends \yii\db\ActiveRecord
             [['price_id', 'price_dates_id', 'value'], 'required'],
             [['price_id', 'price_dates_id'], 'integer'],
             [['value'], 'string'],
+            [['popup'], 'string'],
             [['price_id'], 'exist', 'skipOnError' => true, 'targetClass' => Price::className(), 'targetAttribute' => ['price_id' => 'id']],
             [['price_dates_id'], 'exist', 'skipOnError' => true, 'targetClass' => PriceDates::className(), 'targetAttribute' => ['price_dates_id' => 'id']],
         ];

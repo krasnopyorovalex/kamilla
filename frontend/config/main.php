@@ -56,6 +56,7 @@ return [
                 'robots.txt' => 'robots/show',
                 'load-form-guestbook' => 'reviews/form',
                 '<action:(get-calculation-form|send-calculation-form)>' => 'calculate/<action>',
+                '<action:(get-price-popup)>/<priceId>/<priceDateId>' => 'price/<action>',
                 'form-handler/<action:(order|contact)>' => 'form/<action>',
                 'reviews/<action:(new-review)>' => 'reviews/add',
                 '<alias>/page/<page:\d+>' => 'site/page',

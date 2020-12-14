@@ -27,7 +27,8 @@ class AppAsset extends AssetBundle
         'css/lib/datepicker.min.css',
         'css/price/app.min.css',
         'css/style.css',
-		'css/custom.css'
+		'css/custom.css',
+        'css/main.min.css'
     ];
     public $js = [
         'js/lib/jquery-ui.min.js',

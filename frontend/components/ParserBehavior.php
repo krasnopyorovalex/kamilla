@@ -11,10 +11,10 @@ use frontend\widgets\News\News;
 use frontend\widgets\Price\Price;
 use frontend\widgets\Rooms\Rooms;
 use frontend\widgets\ServicesMenu\ServicesMenu;
+use frontend\widgets\Sitemap\Sitemap;
 use frontend\widgets\Specials\Specials;
 use frontend\widgets\Statistic\Statistic;
 use yii\base\Behavior;
-use frontend\widgets\Sitemap\Sitemap;
 
 /**
  * Class ParserBehavior
@@ -63,6 +63,16 @@ class ParserBehavior extends Behavior
 
         if(strstr($model->text, '{sitemap}')){
             $model->text = str_replace('<p>{sitemap}</p>', Sitemap::widget(), $model->text);
+        }
+
+        preg_match_all("#(<p(.*)>)?{module_price_([\d_])*}(<\/p>)?#", $model->text, $matches);
+        if ($matches[0]) {
+            array_map(function ($item) use ($model)  {
+                $extract = str_replace(['{', '}', 'module_price'], '', $item);
+                $idList = array_filter(explode('_', strip_tags($extract)));
+
+                $model->text = str_replace($item, Price::widget(['idList' => $idList]), $model->text);
+            }, $matches[0]);
         }
 
         preg_match_all("#(<p(.*)>)?{services_([a-z_])*}(<\/p>)?#", $model->text, $matches);

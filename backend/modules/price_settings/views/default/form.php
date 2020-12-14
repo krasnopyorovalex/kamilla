@@ -35,7 +35,10 @@ $this->params['breadcrumbs'][] = $this->context->actions[$this->context->action-
                                     <?= $form->field($model, 'color_second')->textInput() ?>
                                     <?= $form->field($model, 'color_third')->textInput() ?>
                                     <?= $form->field($model, 'color_fourth')->textInput() ?>
+                                    <?= $form->field($model, 'color_five')->textInput() ?>
                                     <?= $form->field($model, 'color_border')->textInput() ?>
+                                    <?= $form->field($model, 'col_name')->textInput() ?>
+                                    <?= $form->field($model, 'col_name_mob')->textInput() ?>
                                 </div>
                             </div>
                         </div>
