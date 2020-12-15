@@ -534,3 +534,6 @@ template {
   width: 30px;
   height: 30px
 }
+.tab-pane .price-table.desktop .slider-box {
+  width: 472px
+}
