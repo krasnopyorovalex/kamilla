@@ -36,7 +36,7 @@ class Multiupload extends Action
             Image::thumbnail($path . $image->basename . '.' . $image->ext, 450, 225)
                 ->save($path . $image->basename . '_thumb.' . $image->ext, ['quality' => 100]);
             //for price
-            Image::thumbnail($path . $image->basename . '.' . $image->ext, 470, 265)
+            Image::thumbnail($path . $image->basename . '.' . $image->ext, 472, 266)
                 ->save($path . $image->basename . '_price.' . $image->ext, ['quality' => 100]);
             return true;
         }

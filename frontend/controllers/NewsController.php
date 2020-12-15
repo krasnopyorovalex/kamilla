@@ -19,6 +19,13 @@ class NewsController extends SiteController
         if(!$model = News::find()->where(['alias' => $alias])->publish()->one()){
             throw new NotFoundHttpException();
         }
+
+        try {
+            $model->text = $this->parse($model);
+        } catch (\Exception $e) {
+            $model->text = $e->getMessage();
+        }
+
         return $this->render('new.twig',[
             'model' => $model
         ]);

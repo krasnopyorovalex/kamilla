@@ -1806,11 +1806,37 @@
 
 
 
-    $('.table__price .gallery, .price-table .gallery').each(function() { // the containers for all your galleries
+    $('.table__price .gallery').each(function() { // the containers for all your galleries
 
         $(this).magnificPopup({
 
             delegate: 'a',
+
+            type: 'image',
+
+            gallery: {
+
+                enabled:true,
+
+                arrowMarkup: '<button title="%title%" type="button" class="mfp-prevent-%dir% hillter-icon-%dir%-arrow"></button>',
+
+                tPrev: '',
+
+                tNext: '',
+
+                tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
+
+            }
+
+        });
+
+    });
+
+    $(' .price-table .gallery').each(function() { // the containers for all your galleries
+
+        $(this).magnificPopup({
+
+            delegate: 'a.img-big',
 
             type: 'image',
 

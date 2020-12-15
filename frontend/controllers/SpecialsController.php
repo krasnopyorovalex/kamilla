@@ -20,6 +20,13 @@ class SpecialsController extends SiteController
         if(!$model = Specials::find()->where(['alias' => $alias])->publish()->limit(1)->one()){
             throw new NotFoundHttpException();
         }
+
+        try {
+            $model->text = $this->parse($model);
+        } catch (\Exception $e) {
+            $model->text = $e->getMessage();
+        }
+
         return $this->render('special.twig',[
             'model' => $model
         ]);

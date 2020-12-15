@@ -32,10 +32,10 @@
                     <td>
                         {% if item.gallery.galleryImages %}
                         <div class="slider-box gallery">
-                            <div class="slider">
+                            <div class="slider owl-carousel owl-theme">
                                 {% for image in item.gallery.galleryImages %}
                                 <div class="slider-item">
-                                    <a href="/userfiles/gallery/{{ image.gallery_id }}/{{ image.basename }}.{{ image.ext }}">
+                                    <a href="/userfiles/gallery/{{ image.gallery_id }}/{{ image.basename }}.{{ image.ext }}" class="img-big">
                                         <img src="{{ image.getForPrice() }}" alt="{{ image.alt }}" title="{{image.title }}">
                                     </a>
                                 </div>
@@ -86,7 +86,7 @@
     .price-table .btn-booking {
         background-color: {{ settings.color_head_btn }}
     }
-    .price-table.desktop .slider-box {
+    .price-table.desktop .slider-box:first-child {
         background-color: {{ settings.color_first }}
     }
 

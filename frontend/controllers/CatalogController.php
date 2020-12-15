@@ -18,13 +18,24 @@ class CatalogController extends SiteController
      */
     public function actionIndex($alias = null)
     {
-        if(!$model = Rooms::find()->where(['alias' => $alias])->with(['roomsAttributesVias','attributesRooms'])->limit(1)->one()){
+        if (!$model = Rooms::find()->where(['alias' => $alias])->with(
+            ['roomsAttributesVias', 'attributesRooms']
+        )->limit(1)->one()) {
             throw new NotFoundHttpException();
         }
 
-        return $this->render('index.twig',[
-            'model' => $model,
-            'rooms_attributes' => ArrayHelper::map($model['attributesRooms'],'id','name'),
-        ]);
+        try {
+            $model->text = $this->parse($model);
+        } catch (\Exception $e) {
+            $model->text = $e->getMessage();
+        }
+
+        return $this->render(
+            'index.twig',
+            [
+                'model' => $model,
+                'rooms_attributes' => ArrayHelper::map($model['attributesRooms'], 'id', 'name'),
+            ]
+        );
     }
 }
