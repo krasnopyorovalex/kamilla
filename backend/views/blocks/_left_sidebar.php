@@ -91,6 +91,14 @@
             </a>
         </li>
 
+        <li>
+            <span class="glow"></span>
+            <a href="<?= \yii\helpers\Url::toRoute(['/popups/default/index'])?>">
+                <i class="icon-bell-alt icon-2x"></i>
+                <span>Модальные окна</span>
+            </a>
+        </li>
+
         <li class="dark-nav">
 
             <span class="glow"></span>
@@ -251,6 +259,7 @@
                                 <li>Статьи - {articles}</li>
                                 <li>Таблица цен - {module_price}</li>
                                 <li>Таблица цен с необходимыми прайсами - {module_price_2_34_12}, где цифры id прайсов</li>
+                                <li>Модальное окно к любой ссылке - <b>/get-popup/1</b> и добавить css класс <b>.awe-ajax</b>, где цифра - это id модального окна</li>
                             </ul>
                         </div>
                         <div class="col-md-6">

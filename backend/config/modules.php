@@ -78,4 +78,7 @@ return [
     'price_settings' => [
         'class' => 'backend\modules\price_settings\PriceSettings',
     ],
+    'popups' => [
+        'class' => 'backend\modules\popups\Popups',
+    ],
 ];

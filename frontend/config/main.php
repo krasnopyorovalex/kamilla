@@ -57,6 +57,7 @@ return [
                 'load-form-guestbook' => 'reviews/form',
                 '<action:(get-calculation-form|send-calculation-form)>' => 'calculate/<action>',
                 '<action:(get-price-popup)>/<priceId>/<priceDateId>' => 'price/<action>',
+                '<action:(get-popup)>/<id>' => 'popup/<action>',
                 'form-handler/<action:(order|contact)>' => 'form/<action>',
                 'reviews/<action:(new-review)>' => 'reviews/add',
                 '<alias>/page/<page:\d+>' => 'site/page',
