@@ -1339,9 +1339,9 @@ blockquote p:after {
   left: 0;
   background-color: #fff;
   list-style: none;
-  padding: 10px 0;
+  padding: 0;
   margin: 0;
-  border: 1px solid #f1f1f1;
+  /* border: 1px solid #f1f1f1; */
   visibility: hidden;
   opacity: 0;
   -webkit-transform: translate(0, 20px);
@@ -1358,7 +1358,7 @@ blockquote p:after {
 }
 .header_content .menu > li .sub-menu li a {
   display: block;
-  padding: 7px 20px;
+  padding: 10px 20px;
   color: #07799e;
   font-size: 14px;
   -webkit-transition: all 0.2s ease;
@@ -1371,11 +1371,11 @@ blockquote p:after {
   top: 2px;
 }
 .header_content .menu > li .sub-menu li.current-menu-item > a {
-  background-color: #07799e;
+  background-color: #2ea9b8;
   color: #fff;
 }
 .header_content .menu > li .sub-menu li:hover > a {
-  background-color: #07799e;
+  background-color: #2ea9b8;
   color: #ffffff;
 }
 .header_content .menu > li .sub-menu li:hover > .sub-menu {

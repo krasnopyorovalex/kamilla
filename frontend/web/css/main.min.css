@@ -182,7 +182,7 @@ template {
   border-radius: 5px;
   text-decoration: none;
   color: #fff;
-  font-size: .75rem;
+  font-size: .9rem;
   text-transform: none
 }
 .price-table .price-table-info {
@@ -202,7 +202,7 @@ template {
 }
 .price-table .price-table-info table td .as-link,
 .price-table .price-table-info table td a {
-  color: #f60;
+  color: #232323;
   text-decoration: underline;
   font-size: 12px
 }
@@ -214,9 +214,9 @@ template {
   border-top: 2px solid #fff;
   border-right: 2px solid #fff;
   border-left: 2px solid #fff;
-  background-color: #e6e6e6;
+  background-color: #e0f0fd;
   padding: 1rem;
-  color: #000;
+  color: #07799e;
   font-size: 13px;
   text-align: center
 }
@@ -270,7 +270,7 @@ template {
   padding: .5rem;
   background-color: rgba(0,0,0,.5);
   text-align: center;
-  color: #f60;
+  color: #fff;
   font-size: 10px;
   line-height: normal
 }
@@ -463,10 +463,11 @@ template {
   padding: 1rem
 }
 .price-table.desktop .slider-box .room-name a:first-child {
-  color: #f60;
+  color: #ffffff;
   text-decoration: underline;
   text-overflow: ellipsis;
   font-size: 14px;
+  margin-right: .5rem;
   text-align: left
 }
 .price-table.desktop .slider-box .room-name a:first-child:hover {
